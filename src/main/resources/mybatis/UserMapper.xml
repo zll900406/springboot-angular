@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zll.mapper.UserMapper">
+ 
+  <!--配置一个resultMap 指定返回的类型 -->
+    <resultMap id="userList" type="com.zll.model.User">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="tel" property="tel" />
+        <result column="tel" property="tel" />
+    </resultMap>
+    
+ <!-- 返回一个list的写法 -->
+    <select id="queryAllUser"  resultMap="userList" >
+        select * from user;
+    </select>
+ 
+ 
+  <select id="getUserByName" resultType="com.zll.model.User">
+    select name,id,pwd,tel from user where name=#{0};
+  </select>
+ <select id="checkLogin" resultType="com.zll.model.User">
+    select name,id,pwd,tel from user where name=#{0} and pwd=#{1};
+  </select>
+   <insert id="addUser">
+    insert into user(name,pwd,tel) value(#{0},#{1},#{2})
+  </insert>
+</mapper>
